@@ -1,16 +1,12 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Posts from './components/Posts';
+import Profile from './components/Profile';
 
 function AuthenticatedApp({ currentUser, setCurrentUser }) {
   const history = useHistory()
-  const [posts, setPosts] = useState([])
-
-  useEffect(() => {
-    fetch('/api/posts')
-      .then(res => res.json())
-      .then(posts => setPosts(posts))
-  }, [])
   
   const handleLogout = () => {
     fetch('/api/logout', {
@@ -26,15 +22,23 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
   }
 
   return (
-    <div>
-      <p>Logged in as {currentUser.username} <button onClick={handleLogout}>Logout</button></p>
-      {posts.map(post => (
-        <div key={post.id}>
-          <h2>{post.title}</h2>
-          <p>{post.content}</p>
-        </div>
-      ))
-      }
+    <div className="App max-w-5xl">
+      <Navbar 
+        currentUser={currentUser}
+        handleLogout={handleLogout}
+      />
+      <Switch>
+        <Route exact path="/">
+          <Posts />
+        </Route>
+        <Route exact path="/profile">
+          <Profile
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
+          />
+        </Route>
+        <Redirect to="/" />
+      </Switch>
     </div>
   );
 }
