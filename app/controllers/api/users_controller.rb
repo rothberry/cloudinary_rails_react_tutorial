@@ -1,6 +1,6 @@
 class Api::UsersController < ApplicationController
 
-  skip_before_action :confirm_authentication
+  skip_before_action :confirm_authentication, except: [:update]
   
   # get '/api/me'
   def show
@@ -22,7 +22,19 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  def update
+    if current_user.update(update_user_params)
+      render json: current_user, status: :ok
+    else
+      render json: user.errors, status: :unprocessable_entity
+    end
+  end
+
   private
+
+  def update_user_params
+    params.permit(:prof_pic_thumbnail_url, :prof_pic_url)
+  end
 
   def user_params
     params.permit(:username, :password, :password_confirmation)

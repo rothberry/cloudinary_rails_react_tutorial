@@ -1,4 +1,4 @@
-# Phase 4, Lesson 8 Image Uploads to Cloudinary
+# Phase 5, Lesson 8 Image Uploads to Cloudinary
 
 - Setting up a Cloudinary account and configuring a new signed upload preset
 - Configuring rails to sign upload requests

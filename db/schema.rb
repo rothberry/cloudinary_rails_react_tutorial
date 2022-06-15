@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_15_193602) do
+ActiveRecord::Schema.define(version: 2022_02_28_192054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,9 @@ ActiveRecord::Schema.define(version: 2021_11_15_193602) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "prof_pic_thumbnail_url"
+    t.string "prof_pic_url"
+    t.string "cloudinary_public_url"
   end
 
   add_foreign_key "posts", "users"
