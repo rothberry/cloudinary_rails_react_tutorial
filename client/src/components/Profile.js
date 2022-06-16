@@ -1,5 +1,5 @@
 import React from 'react'
-// import CloudinaryUpload from './CloudinaryUpload'
+import CloudinaryUpload from './CloudinaryUpload'
 
 function Profile({currentUser, setCurrentUser}) {
   const handleUpload = (result) => {
@@ -26,11 +26,11 @@ function Profile({currentUser, setCurrentUser}) {
     <div className="grid sm:grid-cols-3 gap-4">
       <div className="">
         <img src={currentUser.profile_picture_url || "https://res.cloudinary.com/dpkrqs9rs/image/upload/v1637085098/Profile_avatar_placeholder_large_ky4gfw.png"} />
-        {/* <CloudinaryUpload
-          preset="tl8ilpaq"
+        <CloudinaryUpload
+          preset="meetup_clone_profile_pictures"
           buttonText="Update Profile Picture"
           handleUpload={handleUpload}
-        /> */}
+        />
       </div>
       <div className="col-span-2">
         <h2 className="text-xl">{currentUser.username}</h2>
